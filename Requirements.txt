@@ -1,0 +1,12 @@
+Main.py Installation Friendly Reminder:
+
+Please install these before you run it,
+1. pip3 install pyqt5
+4. pip install ultralytics
+5. pip install lap
+6. pytest
+
+
+
+
+By Your Beloved Teammate - Ting Yi Xuan (30/9/2023 12:39p.m.)
