@@ -1,12 +1,10 @@
-Main.py Installation Friendly Reminder:
-
-Please install these before you run it,
-1. pip3 install pyqt5
-4. pip install ultralytics
-5. pip install lap
-6. pytest
-
-
-
-
-By Your Beloved Teammate - Ting Yi Xuan (30/9/2023 12:39p.m.)
+pyqt5==5.15.9
+ultralytics==8.0.190
+pytest==7.4.2
+mediapipe==0.10.3
+numpy==1.24.3
+djitellopy==2.5.0
+opencv-contrib-python==4.8.0.74
+opencv-python==4.8.0.74
+pip==23.2.1
+tensorflow==2.13.0
