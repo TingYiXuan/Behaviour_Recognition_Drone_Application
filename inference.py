@@ -27,7 +27,7 @@ class TrackingResult:
         return f"X: {self.x}, Y: {self.y}, W: {self.w}, H: {self.h}, ID: {self.id}"
 
 def get_recorder(filename: str, width: int, height: int):
-    if filename is None or filename[-4:] != ".avi":
+    if filename is None:
         raise ValueError("Filename cannot be None if record is True")
 
     fourcc = cv2.VideoWriter_fourcc(*'XVID')
