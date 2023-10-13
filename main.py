@@ -42,7 +42,7 @@ class MainWindow(QMainWindow):
         load_button.clicked.connect(self.open_recordings_folder)
 
         # Create an instance of a QPushButton class (Stream Type).
-        type_stream_label = QLabel('<font size = "4">Video Source:</font>')
+        type_stream_label = QLabel('<font size = "4">Streaming Type:</font>')
         
         # Webcam button
         self.webcam_button = QPushButton("Webcam")
