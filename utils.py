@@ -9,10 +9,11 @@ VIDEO_FPS = 5
 # App settings
 APP_NAME = "Action Recognition"
 APP_AUTHOR = "MCS23"
-RECORDING_PATH = 'Action Recognition Recordings'
+RECORDING_PATH = 'behaviour_recognition_recordings'
 
 # Model name
 MODEL_PATH = "./clean_data.h5"
+OBJECT_TRACKING_MODEL_PATH = "yolov8n.pt"
 ACTIONS = {0: 'Running', 1: 'Punching', 2: 'Waving' , 3: 'Kicking', 4: 'Walking'}
 MAL_ACTIONS = ['Punching', 'Kicking']
 

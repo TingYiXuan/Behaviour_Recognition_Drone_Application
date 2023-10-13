@@ -36,7 +36,7 @@ class StreamWorker(QRunnable):
         pTime = 0
 
         if self.__alert:
-            model = YOLO('yolov8n.pt')
+            model = YOLO(OBJECT_TRACKING_MODEL_PATH)
             mal_people = []
 
         self.__video_source.start() 

@@ -119,5 +119,32 @@ class Drone:
     def get_width(self) -> int:
         return WIDTH
     
+class PreRecorded(VideoSource):
+    def __init__(self, filename: str) -> None:
+        super().__init__()
+        self.__frame = None
+        self.__has_frame = False
+        self.__filename = filename
+
+    def start(self) -> None:
+        self.__cap = cv2.VideoCapture(self.__filename)
+        # self.__cap.set(cv2.CAP_PROP_FRAME_WIDTH, WIDTH)
+        # self.__cap.set(cv2.CAP_PROP_FRAME_HEIGHT, HEIGHT)
+
+    def get_display_frame(self) -> tuple[bool, np.ndarray]:
+        return self.__has_frame, self.__frame
+    
+    def next_frame(self) -> tuple[bool, np.ndarray]:
+        self.__has_frame, self.__frame = self.__cap.read()
+        return self.__has_frame, self.__frame
+    
+    def exit(self) -> None:
+        self.__cap.release()
+
+    def get_height(self) -> int:
+        return int(self.__cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
+    
+    def get_width(self) -> int:
+        return int(self.__cap.get(cv2.CAP_PROP_FRAME_WIDTH))
 
     
