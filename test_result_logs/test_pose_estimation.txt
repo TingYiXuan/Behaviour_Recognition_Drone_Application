@@ -2,26 +2,32 @@
 __________________________
 
 Test 3.2.1.1: Basic pose estimation
+FPS: 20.686006825938566
 Test 3.2.1.1: Completed without errors
 
 
 Test 3.2.1.2: Low light pose estimation
+FPS: 28.427777777777777
 Test 3.2.1.2: Completed without errors
 
 
 Test 3.2.1.3: High FPS pose estimation
+FPS: 19.706818181818182
 Test 3.2.1.3: Completed without errors
 
 
 Test 3.2.1.4: Low FPS pose estimation
+FPS: 14.416666666666666
 Test 3.2.1.4: Completed without errors
 
 
-Test 3.2.1.5: Multiple Human pose estimation
+Test 3.2.1.5: No Human pose estimation
+FPS: 25.352
 Test 3.2.1.5: Completed without errors
 
 
 Test 3.2.1.6: Multiple Human pose estimation
+FPS: 7.384615384615385
 Test 3.2.1.6: Completed without errors
 
 
@@ -31,11 +37,12 @@ Test 3.2.1.7: Completed without errors
 
 
 Test 3.2.1.8: Small scale pose estimation
-108, 315
+83, 165
 Test 3.2.1.8: Completed without errors
 
 
 Test 3.2.1.9: Top Down pose estimation
+FPS: 26.05128205128205
 Test 3.2.1.9: Completed without errors
 
 

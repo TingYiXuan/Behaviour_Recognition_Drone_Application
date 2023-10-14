@@ -1,0 +1,38 @@
+3.2.3 Test Action Recognition
+__________________________
+
+Test 3.2.3.1: 'Kicking' Action Recognition
+FPS: 9.408921933085502
+Test 3.2.3.1: PASSED (Kicking)
+
+
+Test 3.2.3.2: 'Walking' Action Recognition
+FPS: 9.078066914498141
+Test 3.2.3.2: PASSED (Walking)
+
+
+Test 3.2.3.3: 'Running' Action Recognition
+FPS: 9.562674094707521
+Test 3.2.3.3: PASSED (Running)
+
+
+Test 3.2.3.4: 'Waving' Action Recognition
+FPS: 9.986425339366516
+Test 3.2.3.4: PASSED (Waving)
+
+
+Test 3.2.3.5: 'Punching' Action Recognition
+FPS: 6.188940092165899
+Test 3.2.3.5: PASSED (Punching)
+
+
+Test 3.2.3.6: Low FPS Action Recognition
+FPS: 5.681818181818182
+Test 3.2.3.6: PASSED (Walking)
+
+
+Test 3.2.3.7: High FPS Action Recognition
+FPS: 8.934782608695652
+Test 3.2.3.7: PASSED (Running)
+
+

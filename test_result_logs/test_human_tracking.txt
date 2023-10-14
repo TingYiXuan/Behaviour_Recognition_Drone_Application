@@ -1,39 +1,48 @@
 3.2.2 Test Human Tracking
 __________________________
 
-Test 3.2.2.1: Basic pose estimation
+Test 3.2.2.1: Basic human tracking
+FPS: 4.034129692832765
 Test 3.2.2.1: Completed without errors
 
 
-Test 3.2.2.2: Low light pose estimation
+Test 3.2.2.2: Low light human tracking
+FPS: 4.27906976744186
 Test 3.2.2.2: Completed without errors
 
 
-Test 3.2.2.3: High FPS pose estimation
+Test 3.2.2.3: High FPS human tracking
+FPS: 3.9279661016949152
 Test 3.2.2.3: Completed without errors
 
 
-Test 3.2.2.4: Low FPS pose estimation
+Test 3.2.2.4: Low FPS human tracking
+FPS: 3.6666666666666665
 Test 3.2.2.4: Completed without errors
 
 
-Test 3.2.2.5: Multiple Human pose estimation
+Test 3.2.2.5: No Human human tracking
+FPS: 5.057971014492754
 Test 3.2.2.5: Completed without errors
 
 
-Test 3.2.2.6: Multiple Human pose estimation
+Test 3.2.2.6: Multiple Human human tracking
+FPS: 1.9710144927536233
 Test 3.2.2.6: Completed without errors
 
 
-Test 3.2.2.7: Large Scale pose estimation
+Test 3.2.2.7: Large Scale human tracking
+FPS: 4.13986013986014
 Test 3.2.2.7: Completed without errors
 
 
-Test 3.2.2.8: Small scale pose estimation
+Test 3.2.2.8: Small scale human tracking
+FPS: 3.317757009345794
 Test 3.2.2.8: Completed without errors
 
 
-Test 3.2.2.9: Top Down pose estimation
+Test 3.2.2.9: Top Down human tracking
+FPS: 4.441441441441442
 Test 3.2.2.9: Completed without errors
 
 
