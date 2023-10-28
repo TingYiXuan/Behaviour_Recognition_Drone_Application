@@ -1,3 +1,14 @@
+"""
+This module represents the main entry point of the application 
+and the main window of the application
+
+Author: Lim Yun Feng, Ting Yi Xuan, Chua Sheen Wey
+Last Edited: 28/10/2023
+
+Components:
+    - MainWindow: The main window of the application
+    - main: The main (funciton) entry point of the application
+"""
 import os
 from PyQt5.QtWidgets import QApplication, QMainWindow, QWidget, \
     QLabel, QGridLayout, QBoxLayout, QStackedWidget, QPushButton, \
@@ -13,7 +24,27 @@ from stream_thread import StreamWorker
 from video_source import Drone, Webcam
 
 class MainWindow(QMainWindow):
+    """
+    This class represents the main window of the application.
+
+    Attributes:
+        stack (QStackedWidget): The stacked widget that contains all the pages.
+        __stream_type (str): The type of the stream (Webcam or Drone).
+        __is_record (bool): Whether the stream should be recorded.
+        __is_alert (bool): Whether the stream should show alert.
+        __name (str): The name of the recording file.
+        __start_stream_button (QPushButton): The start stream button.
+        __message_label (QLabel): The message label.
+    """
+
     def __init__(self, stack: QStackedWidget) -> None:
+        """
+        The constructor for the MainWindow class. Build the UI and oinitialize 
+        necessary components of the main window
+
+        Parameters:
+            stack (QStackedWidget): The stacked widget that contains all the pages.
+        """
         super(MainWindow, self).__init__()
         self.stack = stack
         self.__stream_type = None
@@ -125,7 +156,7 @@ class MainWindow(QMainWindow):
     
     def startStream(self) -> None:
         """
-        Start streaming from the selected source.
+        Function that is triggered when user clicks on the start stream button.
         """
         # Create a QThreadPool instance.
         pool = QtCore.QThreadPool.globalInstance()
@@ -138,6 +169,7 @@ class MainWindow(QMainWindow):
             source = Drone()
 
         else:
+            # Raise error message and exit if no stream type is selected
             self.__message_label.setVisible(True)
             self.__message_label.setText("Please select a streaming type!")
             return None
@@ -145,6 +177,7 @@ class MainWindow(QMainWindow):
         # Set up if recording is needed
         self.__name = None
         if self.__is_record:
+            # Ask for video name
             self.__name, success = QInputDialog.getText(self, 
                                                  'Request Filename', 
                                                  'Enter a filename for the recording:',
@@ -154,7 +187,7 @@ class MainWindow(QMainWindow):
                 return None
             elif self.__name[-4:] != ".avi" and self.__name[-4:] != ".mp4":
                 self.__name += ".avi"
-
+                
         # Connect the signals so that the thread can communicate with the GUI.
         camera = StreamWorker(source=source, record=self.__is_record, filename=self.__name, alert=self.__is_alert)
         camera.signals.alert.connect(self.send_alert)
@@ -169,24 +202,44 @@ class MainWindow(QMainWindow):
         pool.start(camera)
         
     def setStreamType(self, stream_type: str) -> None:
+        """
+        Function that is triggered when user clicks on the webcam button or drone button.
+
+        Parameters:
+            stream_type (str): The type of the stream (Webcam or Drone).
+        """
         self.__stream_type = stream_type
         if stream_type == "Webcam":
             self.webcam_button.setStyleSheet("background-color : skyblue")
             self.drone_button.setStyleSheet("background-color : white")
-            self.__alert_checkbox.setDisabled(False)
         elif stream_type == "Drone":
             self.drone_button.setStyleSheet("background-color : skyblue")
             self.webcam_button.setStyleSheet("background-color : white")
-            self.__alert_checkbox.setChecked(False)
-            self.__alert_checkbox.setDisabled(True)
-
+        
     def setIsRecord(self, record: bool) -> None:
+        """	
+        Function that is triggered when user clicks on the record checkbox.
+
+        Parameters:
+            record (bool): Whether the stream should be recorded.
+        """
         self.__is_record = record
 
     def setIsAlert(self, alert: bool) -> None:
+        """
+        Function that is triggered when user clicks on the alert checkbox.
+
+        Parameters:
+            alert (bool): Whether the stream should show alert.
+        """
         self.__is_alert = alert
         
     def open_recordings_folder(self):
+        """
+        Function that is triggered when user clicks on the load button.
+
+        Launches the file explorer to the recordings folder and open the selected file
+        """
         response = QFileDialog.getOpenFileName(
             parent=self,
             caption='Select a Recording Video',
@@ -195,13 +248,23 @@ class MainWindow(QMainWindow):
         if response[0] != '':
             os.startfile(response[0])
             
-    def send_alert(self, subject_id: int, action: str):   
+    def send_alert(self, subject_id: int, action: str):
+        """
+        Function that is triggered when the stream worker thread detects an indecent behaviour.
+
+        Parameters:
+            subject_id (int): The subject ID of the person who is performing the indecent behaviour.
+            action (str): The indecent behaviour that is performed.
+        """   
+        # Create a notification window
         msg = QMessageBox()
         msg.setIcon(QMessageBox.Critical)
 
+        # Add the current time to the message
         now = datetime.now()
         current_time = now.strftime("%H:%M:%S")
 
+        # Set the message
         msg.setText("Subject ID {} was caught {} at {}".format(subject_id, action, current_time))
         msg.setWindowTitle("Indecent Behaviour Alert")
         
@@ -210,14 +273,22 @@ class MainWindow(QMainWindow):
         msg.exec()
 
     def end_stream(self):
+        """
+        Function that is triggered when the stream worker thread ends.
+        """
+        # Enable the start stream button and show the message label
         self.__start_stream_button.setEnabled(True)
 
+        # Show the message label
         if self.__is_record:
             self.__message_label.setText("Filename: '" + self.__name + "' saved successfully!")
         else:
             self.__message_label.setVisible(False)
 
 def main() -> None:
+    """	
+    The main (function) entry point of the application.
+    """
     app = QApplication(sys.argv)
 
     # Create an instance of a QStackedWidget class.

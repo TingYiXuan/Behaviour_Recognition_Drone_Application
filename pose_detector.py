@@ -1,3 +1,16 @@
+"""
+This module contains the PoseDetector class, which is 
+used to detect the pose of a person in a video frame.
+
+It also displays the pose landmarks on the video frame.
+
+Author: Lim Yun Feng, Ting Yi Xuan, Chua Sheen Wey
+Last Edited: 28/10/2023
+
+Components:
+    - findPose: Detects the pose of a person in a video frame.
+    - extract_keypoints: Extracts the pose keypoints from the video frame.
+"""
 import mediapipe as mp
 import numpy as np
 import tensorflow as tf
@@ -6,9 +19,35 @@ import cv2
 from utils import MODEL_PATH
 
 class PoseDetector:
+    """
+    A class used to detect the pose of a person in a video frame.
+
+    Attributes:
+        mode (bool): Whether to detect the pose in static image or video.
+        upBody (bool): Whether to detect the upper body pose.
+        smooth (bool): Whether to smooth the pose landmarks.
+        detectionCon (float): Minimum confidence value for the pose detection to be considered successful.
+        trackCon (float): Minimum confidence value for the pose tracking to be considered successful.
+        mpDraw (mediapipe.solutions.drawing_utils): Used to draw the pose landmarks on the video frame.
+        mpHolistic (mediapipe.solutions.holistic): Used to detect the pose of a person in a video frame.
+        holistic (mediapipe.solutions.holistic.Holistic): The holistic model.
+        drawSpec (mediapipe.solutions.drawing_utils.DrawingSpec): The drawing specification for the pose landmarks.
+        new_model (tensorflow.python.keras.engine.sequential.Sequential): The sequential model used to predict the pose.
+        sequence (list): The list of pose keypoints extracted from the video.
+        sentence (list): The list of predicted pose labels.
+    """
 
     def __init__(self, mode=False, upBody=False, smooth=True, detectionCon=0.5, trackCon=0.5):
+        """
+        The constructor for the PoseDetector class.
 
+        Parameters:
+            mode (bool): Whether to detect the pose in static image or video.
+            upBody (bool): Whether to detect the upper body pose.
+            smooth (bool): Whether to smooth the pose landmarks.
+            detectionCon (float): Minimum confidence value for the pose detection to be considered successful.
+            trackCon (float): Minimum confidence value for the pose tracking to be considered successful.
+        """
         self.mode = mode
         self.upBody = upBody
         self.smooth = smooth
@@ -26,11 +65,19 @@ class PoseDetector:
         self.sentence = []
 
     def findPose(self, img, draw=True):
+        """
+        Detects the pose of a person in a video frame.
 
+        Parameters:
+            img (numpy.ndarray): The video frame.
+            draw (bool): Whether to draw the pose landmarks on the video frame.
+
+        Returns:
+            results (mediapipe.python.solution_base.SolutionOutputs): The pose landmarks.
+            img (numpy.ndarray): The video frame with the pose landmarks drawn on it.
+        """
         imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
         results = self.holistic.process(imgRGB)
-
-        # face_landmarks, pose_landmarks, left_hand_landmarks, right_hand_landmarks
 
         if results.pose_landmarks:
             if draw:
@@ -43,6 +90,15 @@ class PoseDetector:
         return results, img
 
     def extract_keypoints(self, results):
+        """
+        Extracts the pose keypoints from the video frame.
+
+        Parameters:
+            results (mediapipe.python.solution_base.SolutionOutputs): The pose landmarks.
+
+        Returns:
+            np.concatenate([pose]) (numpy.ndarray): The pose keypoints.
+        """
         pose = np.array([[res.x, res.y, res.z, res.visibility] for res in
                          results.pose_landmarks.landmark]).flatten() if results.pose_landmarks else np.zeros(33 * 4)
         return np.concatenate([pose])
