@@ -1,6 +1,7 @@
 # Real-time Behaviour Recognition on a Surveillance Drone
 
 Project: FIT3161/FIT3162 Computer Science Project
+<br>Github: https://github.com/TingYiXuan/Behaviour_Recognition_Drone_Application.git
 <br>Group: MCS23
 <br>Contributors: Lim Yun Feng, Ting Yi Xuan, Chua Sheen Wey 
 <br>Year: 2023
